@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear y Copiar Texto</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 2em;
+    font-size: 0.875rem;
+}
+
+button {
+    cursor: pointer;
+    padding: 0.5em 1em;
+    margin: 0.25em;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 0.3em;
+    transition: background-color 0.3s;
+    font-size: inherit;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#contenedor {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1em;
+}
+
+input[type="text"] {
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 0.3em;
+    width: 100%;
+    font-size: inherit;
+}
+
+div {
+    display: flex;
+    gap: 0.5em;
+}
+
+    </style>
+</head>
+<body>
+    <button onclick="crearCajaTexto()">Crear caja de texto</button>
+    <div id="contenedor"></div>
+    <script>
+function crearCajaTexto() {
+    var contenedor = document.getElementById('contenedor');
+
+    var cajaTexto = document.createElement('input');
+    cajaTexto.type = 'text';
+    cajaTexto.placeholder = 'Escribe aquí...';
+
+    var botonCopiar = document.createElement('button');
+    botonCopiar.textContent = 'Copiar';
+    botonCopiar.onclick = function() {
+        copiarAlPortapapeles(cajaTexto);
+    };
+
+    var div = document.createElement('div');
+    div.appendChild(cajaTexto);
+    div.appendChild(botonCopiar);
+
+    contenedor.appendChild(div);
+}
+
+function copiarAlPortapapeles(elemento) {
+    elemento.select();
+    elemento.setSelectionRange(0, 99999); // Para dispositivos móviles
+
+    document.execCommand('copy');
+
+    // alert('Texto copiado al portapapeles');
+}
+
+  </script>
+</body>
+</html>
